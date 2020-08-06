@@ -1,0 +1,86 @@
+﻿
+http://callscreen/CallScreenSystem-note/DesktopService/Login/Login.aspx
+
+public  ResponseModel ResponseHttp(ResponseModel res, Exception ex, string fromApi, bool b = true)
+        {
+           
+            ResponseModel Res = new ResponseModel();
+            if (!b)
+            {
+                Res.error = ex;
+                Res.errorCode = HttpStatusCode.InternalServerError.ToString();
+                Res.data = null;
+                Res.message = $"Service : { fromApi } Message =: { ex.Message}";
+                Res.success = false;
+            }
+            else
+            {
+                if (res.success == false && res.errorCode == null)
+                {
+                    Res.error = ex;
+
+                    Res.errorCode = HttpStatusCode.NoContent.ToString();
+                    Res.data = null;
+                    Res.message = $"Service : { fromApi } Message =: พบปัญหาการทำงานของ API " + "  |  " + "An API has encountered a problem.";
+                    Res.success = false;
+                }
+                else
+                {
+                    Res = res;
+                }
+
+            }
+            return  Res;
+        }
+
+
+    public class ChkRenderCpn
+    {
+        public DataPM _PM { get; set; }
+        public DataCU _CU { get; set; }
+    }
+    public class DataPM
+    {
+        public string Show { get; set; }
+
+
+        private bool taskcompleted;
+        public bool TaskCompleted {
+            get { return taskcompleted; }
+            set {
+                taskcompleted = value;
+
+            }
+        }
+        public bool Renderhtml { get; set; }
+
+    }
+    public class DataCU
+    {
+        public string Show { get; set; }
+        public bool TaskCompleted { get; set; }
+        public bool Renderhtml { get; set; }
+    }
+
+
+
+<div style="width:80%">
+    <div class="row">
+        <div class="col-md-6" style="padding-right: 0px;">
+            <div class="boxInVNC">
+
+            </div>
+        </div>
+        <div class="col-md-6" style="padding-left: 0px;">
+            <div class="row">
+                <div class="col-md-6" style="padding-right: 0px;">
+
+                </div>
+                </div>
+               
+                <div class="boxInVNC">
+
+                </div>
+            </div>
+    </div>
+</div>
